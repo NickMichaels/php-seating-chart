@@ -221,9 +221,11 @@ class SeatingChart {
                 $saveValue = 'o';
             }
             // If we dont grab it first and then re-store
-            // we get the error described here https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
-            // it is slightly memory inefficient to do this but with comapred
-            // to a normal php array overall the program is faster
+            // we get the error described here 
+            // https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
+            // it is slightly memory inefficient to do this but with compared
+            // to using a normal php array for the data set, overall the program is faster
+            // using SplFixedArray instead
             $change = $this->_data[$rIndex][$cIndex];
             $change['value'] = $saveValue;
             $this->_data[$rIndex][$cIndex] = $change;
