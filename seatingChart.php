@@ -173,7 +173,7 @@ class SeatingChart {
             // This assumes the that format is RXCY, if that were to flip, the indexes would be wrong
             $arr = preg_split('/[RC]/', $res, null, PREG_SPLIT_NO_EMPTY);
 
-			// Since the reservation format starts with 1, and arrays start with 0
+            // Since the reservation format starts with 1, and arrays start with 0
             // we need to adjust these indexes
             $rIndex = intval($arr[0] -1);
             $cIndex = intval($arr[1] -1);
@@ -319,7 +319,7 @@ class SeatingChart {
      * @return array 
      */
     public function findBestSeat($numSeats, $bestScore) {
-    	// We don't handle seat requests higher than 10
+        // We don't handle seat requests higher than 10
         if ($numSeats > 10) {
             return 'Too many seats requested. 10 is the limit';
         }
@@ -342,7 +342,7 @@ class SeatingChart {
 
                 // If the seat isn't reserved, let's pry a little deeper
                 if (!$this->isReserved($rIndex, $cIndex) ) {
-                	// Yay! we have our first seat in this "cluster"
+                    // Yay! we have our first seat in this "cluster"
                     $seatsInCluster++;
 
                     $mnhtnValue = $this->getManhattanValue($rIndex, $cIndex);
@@ -399,8 +399,8 @@ class SeatingChart {
                                     'numSeats' => $numSeats,
                                 );
 
-		                        // This is the best possible option based on manhattan distance
-		                        // so return it
+                                // This is the best possible option based on manhattan distance
+                                // so return it
                                 if ($mnhtnValue <= $bestScore) {
                                     return $optArr;
                                 }
