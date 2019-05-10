@@ -195,7 +195,7 @@ while($f = fgets(STDIN)){
     $input .= $f;
 }
 
-$driver = new ReservationDriver($input);
+$driver = new ReservationDriver($input, false);
 $driver->runSeatingChart(3, 11,'R1C6');
 
 /*
