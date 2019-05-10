@@ -1,6 +1,18 @@
 # php-seating-chart
 Seating chart for movie theatre written in PHP 5.6
 
+To run:
+
+$ php reservationDriver.php < reservations.txt 
+
+Or if you want to pipe output into a separate file
+
+$ php reservationDriver.php < reservations.txt > output.txt
+
+If you want to see the seating Chart and a tabular representation of the Manhattan Distance from any given seat to the best seat, change the second parameter when instantiating $reservationDriver to true.
+
+There are also basic performance metrics at the bottom of the reservationDriver.php file that I used when developing this solution. They can be uncommented to see performance.
+
 ## Interview Puzzle
 Your younger sister is putting on a puppet show in your family's back yard. She has left you in charge of ticketing the big event. She has informed you that she wants assigned seating. She plans on setting up 33 seats; 3 rows with 11 seats each. She already has several seats reserved for her parents and best friends. Being a good computer scientist, you decide to whip up a quick program to help her out.
 
