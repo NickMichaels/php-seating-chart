@@ -164,7 +164,7 @@ class SeatingChart {
      * as 'x' - this helps with visual representation after our script has run
      *
      * @param array $initRes
-     * @return mixed 
+     * @return void 
      */
     public function handleInitialReservations($initRes) {
         // Each array value should be in the form of R1C1
@@ -180,18 +180,22 @@ class SeatingChart {
 
             // Sanity check that they exist within the bounds of the defined rows and columns
             if ( ($rIndex >= $this->_rows) || ($cIndex >= $this->_columns) ) {
-                return "Initial reservation at position " . $index . " is out of bounds. Aborting program. \r\n";
+                $error = "Initial reservation at position " . $index . " is out of bounds. Aborting program.";
+                throw new Exception($error);
+                exit(1);
             }
 
             // Now let's try to mark them
             if ($this->markReserved($rIndex, $cIndex, TRUE) === FALSE) {
-                return "Initial reservations contained duplicates at position " . $index . ". Aborting program. \r\n";
+                $error = "Initial reservations contained duplicates at position " . $index . ". Aborting program.";
+                throw new Exception($error);
+                exit(1);
             }
         }
 
         // If we got through the loop ok, then initial reservations were processed, so return true, 
         // since we don't want output unless it's one of the above catastrophic errors
-        return true;
+        //return true;
     }
 
     /**
@@ -284,7 +288,15 @@ class SeatingChart {
                 $bestScore = $bestScore + ($x+1);
             }
 
-            $seats = $this->findBestSeat($numSeats, $bestScore);
+            //$seats = $this->findBestSeat($numSeats, $bestScore);
+
+            try {
+                 $seats = $this->findBestSeat($numSeats, $bestScore);
+            }
+            catch (Exception $e) {
+                $outArr[] = $e->getMessage();
+            }
+
             if (is_array($seats)) {
                 // Parse the array and assign the seats
                 for ($i = $seats['cStart']; $i < ($seats['numSeats'] + $seats['cStart']); $i++) {
@@ -321,13 +333,15 @@ class SeatingChart {
     public function findBestSeat($numSeats, $bestScore) {
         // We don't handle seat requests higher than 10
         if ($numSeats > 10) {
-            return 'Too many seats requested. 10 is the limit';
+           // return 'Too many seats requested. 10 is the limit';
+            throw new Exception('Too many seats requested. 10 is the limit');
         }
 
         // We can't handle seat requests for consectuive seats larger than the total
         // amount of columns aka the total number of seats in any given row
         if ($numSeats > $this->_columns) {
-            return 'Too many seats requested. Limit exceeds number of seats available in any given row';
+            //return 'Too many seats requested. Limit exceeds number of seats available in any given row';
+            throw new Exception('Too many seats requested. Limit exceeds number of seats available in any given row');
         }
 
         // Barring some oddly shaped theatres where non front rows

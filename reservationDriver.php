@@ -61,15 +61,23 @@ class ReservationDriver {
     public function runSeatingChart($rows, $columns, $bestSeat) {
         // Validate that the best seat is within the bounds of the rows and columns
         $bestArr = SeatingChart::parseBestSeat($bestSeat);
-        if ( ($bestArr['bestRow'] > $rows) || ($bestArr['bestCol'] > $columns)) {
+
+        if ( (intval($rows) < 1) || (intval($columns) < 1) ) {
+            $error = "Program instantiating with invalid parameters for rows $rows and / or columns $columns. Aborting program. \r\n";
+            throw new Exception($error);
+            exit(1);         
+        }
+
+        if ( ($bestArr['bestRow'] > $rows) || ($bestArr['bestCol'] > $columns) ) {
             $error = "Best seat at coordinates " . $bestSeat . " is out of bounds. Aborting program. \r\n";
-            fwrite(STDOUT, $error);
-            exit();
+            throw new Exception($error);
+            exit(1);
         }
         $this->_seatingChart = new SeatingChart($rows, $columns, $bestSeat);
         $this->parseInput();
 
         $output = $this->assignSeats();
+
         // Show the number of seats remaining
         $output .= $this->_seatingChart->getSeatsAvailable();
 
@@ -121,15 +129,14 @@ class ReservationDriver {
         $output = "";
 
         // Assign primary reservations
-        $initResProc = $this->_seatingChart->handleInitialReservations($this->_initRes);
-        // If the call returned true, we have no errors with the initial reservations
-        // otherwise output those errors here
-        if ($initResProc !== TRUE) {
-            $error = $initResProc . "\r\n";
-            fwrite(STDOUT, $error);
-            exit();
+        try {
+            $this->_seatingChart->handleInitialReservations($this->_initRes);
         }
-        
+        catch (Exception $e) {
+            throw $e;
+            exit(1);
+        }
+
         // Assign secondary best available reservations
         $outArr = $this->_seatingChart->handleSecondaryReservations($this->_secRes);
         foreach ($outArr as $str) {
@@ -195,8 +202,18 @@ while($f = fgets(STDIN)){
     $input .= $f;
 }
 
-$driver = new ReservationDriver($input, false);
-$driver->runSeatingChart(3, 11,'R1C6');
+try {
+    $driver = new ReservationDriver($input, false);
+    $driver->runSeatingChart(3, 11,'R1C6');
+}
+catch (Exception $e) {
+    echo ($e->getMessage());
+}
+
+/*
+$val = 1 <<3 | 0xC0DE;
+echo $val . "@showclix.com";
+*/
 
 /*
 echo "\nPerformance Stats\r\n";
