@@ -71,29 +71,35 @@ We are looking for clever, well-documented, maintinable and efficient solutions,
 ## Sample Input
 Your seating chart should have initial 6 reservations for friends and family. 3 groups of 3 ask to attend, followed by a lone attendee. Finally, a single group of 10 ask to sit together. The input for this example would be:
 
-```R1C4 R1C6 R2C3 R2C7 R3C9 R3C10
+```
+R1C4 R1C6 R2C3 R2C7 R3C9 R3C10
 3
 3
 3
 1
-10```
+10
+```
 
 ## Sample Output
 
 You easily seat the 3 groups of 3 and the solo attendee, but unfortunately there are not 10 consecutive seats for the large group. Your program should output:
 
-```R1C7 - R1C9
+```
+R1C7 - R1C9
 R2C4 - R2C6
 R3C5 - R3C7
 R1C5
 Not Available
-17```
+17
+```
 
 This is the state of the seating chart at termination to aid your visualization.
 
-```1	2	3	4	5	6	7	8	9	10	11
+```
+1	2	3	4	5	6	7	8	9	10	11
 1	 	 	 	x	o	x	o	o	o	 	 
 2	 	 	x	o	o	o	x	 	 	 	 
 3	 	 	 	 	o	o	o	 	x	x	 
 x - Initial reservation; o - Reserved by best available selection
-Note this is only for reference, tabular format of output is not required.```
+Note this is only for reference, tabular format of output is not required.
+```
