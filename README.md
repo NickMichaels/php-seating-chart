@@ -1,7 +1,7 @@
 # php-seating-chart
 Seating chart for movie theatre written in PHP 5.6
 
-To run:
+## Run from Command Line
 
 $ php reservationDriver.php < reservations.txt 
 
