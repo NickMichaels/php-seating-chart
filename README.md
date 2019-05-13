@@ -22,7 +22,7 @@ $ docker build -t php-seating-chart .
 $ docker run --rm --name seating-chart-demo php-seating-chart
 ```
 
-## Interview Puzzle
+## Original Problem - Interview Puzzle
 Your younger sister is putting on a puppet show in your family's back yard. She has left you in charge of ticketing the big event. She has informed you that she wants assigned seating. She plans on setting up 33 seats; 3 rows with 11 seats each. She already has several seats reserved for her parents and best friends. Being a good computer scientist, you decide to whip up a quick program to help her out.
 
 ## Instructions
