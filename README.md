@@ -3,11 +3,11 @@ Seating chart for movie theatre written in PHP 5.6
 
 ## Run from Command Line
 
-```$ php reservationDriver.php < reservations.txt ```
+```$ php reserveSeats.php < reservations.txt ```
 
 Or if you want to pipe output into a separate file
 
-```$ php reservationDriver.php < reservations.txt > output.txt```
+```$ php reserveSeats.php < reservations.txt > output.txt```
 
 If you want to see the seating Chart and a tabular representation of the Manhattan Distance from any given seat to the best seat, change the second parameter when instantiating $reservationDriver to true.
 
