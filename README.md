@@ -22,6 +22,36 @@ $ docker build -t php-seating-chart .
 $ docker run --rm --name seating-chart-demo php-seating-chart
 ```
 
+## Run PHPUnit Tests
+
+You will need to have PHPUnit installed in order to run these tests. Details on installing the versions that I used for this project exist [here](https://phpunit.de/getting-started/phpunit-5.html).
+```
+$ phpunit --bootstrap './tests/autoload.php' './tests/ReservationDriverTest'
+PHPUnit 5.7.12 by Sebastian Bergmann and contributors.
+
+.......                                                             7 / 7 (100%)
+
+Time: 88 ms, Memory: 14.00MB
+
+OK (7 tests, 7 assertions)
+$ phpunit --bootstrap './tests/autoload.php' './tests/SeatingChartTest'
+PHPUnit 5.7.12 by Sebastian Bergmann and contributors.
+
+.........                                                           9 / 9 (100%)
+
+Time: 91 ms, Memory: 14.00MB
+
+OK (9 tests, 19 assertions)
+$ phpunit --bootstrap './tests/autoload.php' './tests'
+PHPUnit 5.7.12 by Sebastian Bergmann and contributors.
+
+................                                                  16 / 16 (100%)
+
+Time: 104 ms, Memory: 14.00MB
+
+OK (16 tests, 26 assertions)
+```
+
 ## Original Problem - Interview Puzzle
 Your younger sister is putting on a puppet show in your family's back yard. She has left you in charge of ticketing the big event. She has informed you that she wants assigned seating. She plans on setting up 33 seats; 3 rows with 11 seats each. She already has several seats reserved for her parents and best friends. Being a good computer scientist, you decide to whip up a quick program to help her out.
 
