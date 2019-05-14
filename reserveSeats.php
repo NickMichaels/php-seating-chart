@@ -2,7 +2,7 @@
 
 // Call the driver here instead of adding this at the bottom of
 // the reservationDriver class file
-require_once './src/reservationDriver.php';
+require_once 'src/reservationDriver.php';
 
 $start = microtime(true);
 $initalMemStr = "Initial Mem Usage: ". round(memory_get_usage() / 1024) . "KB\r\n";
@@ -15,7 +15,7 @@ while($f = fgets(STDIN)){
 }
 
 try {
-    $driver = new ReservationDriver($input, true);
+    $driver = new ReservationDriver($input);
     $output = $driver->runSeatingChart(3, 11,'R1C6');
     fwrite(STDOUT, $output);
 }
