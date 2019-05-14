@@ -3,6 +3,9 @@ use PHPUnit\Framework\TestCase;
 
 final class SeatingChartTest extends TestCase {
 
+    /**
+     * Initial setup of properties / test data and expected outputs
+     */
     public function setUp() {
         $this->_goodInitRes = array('R1C4', 'R1C6', 'R2C3', 'R2C7', 'R3C9', 'R3C10');
         $this->_badInitRes = array('R1C4', 'R1C6', 'R2C3', 'R2C7', 'R3C9', 'R3C12');
@@ -27,12 +30,18 @@ final class SeatingChartTest extends TestCase {
 		);
    	}
 
+    /**
+     * Test that we can create a new object and it is an instance of the proper class
+     */
     public function testCanBeInstatiated() {
         $seat = new SeatingChart(3, 11, 'R1C6');
         $this->assertInstanceOf(SeatingChart::class, $seat);
     }
 
     /**
+     * Test that when we get an exception when we attempt to create 
+     * an instance with an invalid number of rows
+     *
      * @expectedException Exception
      */
     public function testInstantiateBadRows() { 
@@ -40,6 +49,9 @@ final class SeatingChartTest extends TestCase {
     }
 
     /**
+     * Test that when we get an exception when we attempt to create 
+     * an instance with an invalid number of columns
+     *
      * @expectedException Exception
      */
     public function testInstantiateBadCols() { 
@@ -47,12 +59,20 @@ final class SeatingChartTest extends TestCase {
     }
 
     /**
+     * Test that when we get an exception when we attempt to create 
+     * an instance with an invalid "best seat" string
+     *
      * @expectedException Exception
      */
     public function testInstantiateBadBestSeat() { 
         $seat = new SeatingChart(3, 0, 'R1C12');
     }
 
+    /**
+     * Test that when we process a set of known valid
+     * initial reservation data, that we actually mark
+     * the requested seats as reserved.
+     */
     public function testHandleInitialReservations() {
     	$seat = new SeatingChart(3, 11, 'R1C6');
     	$seat->handleInitialReservations($this->_goodInitRes);
@@ -70,6 +90,9 @@ final class SeatingChartTest extends TestCase {
     }
 
     /**
+     * Test we get an exception when we pass out of bounds 
+     * initial reservation data
+     *
      * @expectedException Exception
      */
     public function testBadInitialReservations() {
@@ -78,6 +101,9 @@ final class SeatingChartTest extends TestCase {
     }
 
     /**
+     * Test we get an exception when we pass duplicate
+     * initial reservation data
+     *
      * @expectedException Exception
      */
     public function testDupeInitialReservations() {
@@ -85,6 +111,11 @@ final class SeatingChartTest extends TestCase {
     	$seat->handleInitialReservations($this->_dupeInitRes);
     }
 
+    /**
+     * Test we get the expected output and number of seats 
+     * remaining when processing secondary reservations
+     * with two separate sets of reservations
+     */
     public function testHandleSecondaryReservations() {
     	$seat = new SeatingChart(3, 11, 'R1C6');
     	$seat->handleInitialReservations($this->_goodInitRes);
@@ -104,6 +135,10 @@ final class SeatingChartTest extends TestCase {
     	$this->assertEquals(14, $seat1->getSeatsAvailable());
     }
 
+    /**
+     * Test that the number of seats available is being
+     * decremented appropriately when we process reservations
+     */
     public function testGetSeatsAvailable() {
     	$seat = new SeatingChart(3, 11, 'R1C6');
     	$seat->handleInitialReservations($this->_goodInitRes);

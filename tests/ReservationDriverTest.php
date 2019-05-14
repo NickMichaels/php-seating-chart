@@ -3,6 +3,9 @@ use PHPUnit\Framework\TestCase;
 
 final class ReservationDriverTest extends TestCase {
 
+    /**
+     * Initial setup of properties / test data and expected outputs
+     */
     public function setUp() {
         $this->_goodInput = 'R1C4 R1C6 R2C3 R2C7 R3C9 R3C10
 3
@@ -50,12 +53,17 @@ x - Initial reservation; o - Reserved by best available selection
 ';
 	  }
 
+    /**
+     * Test that we can create a new object and it is an instance of the proper class
+     */
     public function testCanBeInstantiated() {
         $reserve = new ReservationDriver($this->_goodInput, false);
         $this->assertInstanceOf(ReservationDriver::class, $reserve);
     }
 
     /**
+     * Test that we get an exception when was pass blank input into the class
+     *
      * @expectedException Exception
      */
     public function testNoInput() {
@@ -63,12 +71,20 @@ x - Initial reservation; o - Reserved by best available selection
         $this->assertInstanceOf(ReservationDriver::class, $reserve);
     }
 
+    /**
+     * Test that we can create a new instance with good date
+     * and get the expected output
+     */
     public function testRunSeatingChart() {
    		  $reserve = new ReservationDriver($this->_goodInput, false);
         $output = $reserve->runSeatingChart(3, 11, 'R1C6');
         $this->assertEquals($this->_goodOutput, $output);
     }
 
+    /**
+     * Test that we can create a new instance with good date
+     * and get the expected output that includes charts
+     */
     public function testRunSeatingChartWithCharts() {
         $reserve = new ReservationDriver($this->_goodInput, true);
         $output = $reserve->runSeatingChart(3, 11, 'R1C6');
@@ -76,6 +92,9 @@ x - Initial reservation; o - Reserved by best available selection
     }
 
     /**
+     * Test that when we attempt to create a new instance
+     * with out of bounds data, that we get an exception
+     *
      * @expectedException Exception
      */
     public function testRunSeatingChartBadReservation() { 
@@ -84,6 +103,9 @@ x - Initial reservation; o - Reserved by best available selection
     }
 
     /**
+     * Test that when we attempt to create a new instance
+     * with duplicate data, that we get an exception
+     *
      * @expectedException Exception
      */
     public function testRunSeatingChartDupeReservation() { 
@@ -92,6 +114,9 @@ x - Initial reservation; o - Reserved by best available selection
     }
 
     /**
+     * Test that when we try to execute runSeatingChart
+     * with an invalid number of rows, we get an exception
+     *
      * @expectedException Exception
      */
     public function testRunSeatingChartBadRows() { 
@@ -100,6 +125,9 @@ x - Initial reservation; o - Reserved by best available selection
     }
 
     /**
+     * Test that when we try to execute runSeatingChart
+     * with an invalid number of columns, we get an exception
+     *
      * @expectedException Exception
      */
     public function testRunSeatingChartBadCols() { 
@@ -108,6 +136,9 @@ x - Initial reservation; o - Reserved by best available selection
     }
 
     /**
+     * Test that when we try to execute runSeatingChart
+     * with an invalid "best seat" string, we get an exception
+     *
      * @expectedException Exception
      */
     public function testRunSeatingChartBadBestSeat() { 
