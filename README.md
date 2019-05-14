@@ -11,7 +11,7 @@ Or if you want to pipe output into a separate file
 
 If you want to see the seating Chart and a tabular representation of the Manhattan Distance from any given seat to the best seat, change the second parameter when instantiating $reservationDriver to true.
 
-There are also basic performance metrics at the bottom of the reservationDriver.php file that I used when developing this solution. They can be uncommented to see performance.
+There are also basic performance metrics at the bottom of the reserveSeats.php file that I used when developing this solution. They can be uncommented to see performance.
 
 ## Run in Docker Container
 
