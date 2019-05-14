@@ -14,14 +14,14 @@ final class ReservationDriverTest extends TestCase {
 1
 10';
 
-		    $this->_badInitRes = 'R1C4 R1C6 R2C3 R2C7 R3C9 R3C12
+        $this->_badInitRes = 'R1C4 R1C6 R2C3 R2C7 R3C9 R3C12
 3
 3
 3
 1
 10';
 
-		    $this->_dupeInitRes = 'R1C4 R1C6 R2C3 R2C7 R3C9 R3C9
+        $this->_dupeInitRes = 'R1C4 R1C6 R2C3 R2C7 R3C9 R3C9
 3
 3
 3
@@ -51,7 +51,7 @@ x - Initial reservation; o - Reserved by best available selection
 |2|6|5|4|3|2|1|2|3|4|5 |6 |
 |3|7|6|5|4|3|2|3|4|5|6 |7 |
 ';
-	  }
+      }
 
     /**
      * Test that we can create a new object and it is an instance of the proper class
@@ -76,7 +76,7 @@ x - Initial reservation; o - Reserved by best available selection
      * and get the expected output
      */
     public function testRunSeatingChart() {
-   		  $reserve = new ReservationDriver($this->_goodInput, false);
+        $reserve = new ReservationDriver($this->_goodInput, false);
         $output = $reserve->runSeatingChart(3, 11, 'R1C6');
         $this->assertEquals($this->_goodOutput, $output);
     }
@@ -98,8 +98,8 @@ x - Initial reservation; o - Reserved by best available selection
      * @expectedException Exception
      */
     public function testRunSeatingChartBadReservation() { 
-   	    $reserve = new ReservationDriver($this->_badInitRes, false);
-   	    $output = $reserve->runSeatingChart(3, 11, 'R1C6');
+        $reserve = new ReservationDriver($this->_badInitRes, false);
+        $output = $reserve->runSeatingChart(3, 11, 'R1C6');
     }
 
     /**
@@ -109,8 +109,8 @@ x - Initial reservation; o - Reserved by best available selection
      * @expectedException Exception
      */
     public function testRunSeatingChartDupeReservation() { 
-   	    $reserve = new ReservationDriver($this->_dupeInitRes, false);
-   	    $output = $reserve->runSeatingChart(3, 11, 'R1C6');
+        $reserve = new ReservationDriver($this->_dupeInitRes, false);
+        $output = $reserve->runSeatingChart(3, 11, 'R1C6');
     }
 
     /**
