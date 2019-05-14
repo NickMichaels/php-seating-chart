@@ -24,11 +24,6 @@ catch (Exception $e) {
 }
 
 /*
-$val = 1 <<3 | 0xC0DE;
-echo $val . "@showclix.com";
-*/
-
-/*
 echo "\nPerformance Stats\r\n";
 echo "--------------------\r\n";
 echo $initalMemStr;
